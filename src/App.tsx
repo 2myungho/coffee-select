@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { firestore } from "./firebase";
+import React, { useEffect, useState } from "react";
 import { useMemo } from "react";
 
 function App() {
@@ -27,6 +28,18 @@ function App() {
   ));
 
   const onMenuChange = () => setMenuChange(!menuChange);
+
+  useEffect(() => {
+    // coffeeSelect라는 변수로 firestore의 collection인 coffee-select에 접근
+    const coffeeSelect = firestore.collection("coffee-select");
+    coffeeSelect
+      // document
+      .doc("lPycKHkwzNcWRwqKTD5j")
+      .get()
+      .then((data) => {
+        console.log(data.data());
+      });
+  }, []);
 
   return (
     <>
