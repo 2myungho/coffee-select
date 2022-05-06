@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/coffee-select/static/css/main.e6c13ad2.css",
-    "main.js": "/coffee-select/static/js/main.dfcb238c.js",
+    "main.css": "/coffee-select/static/css/main.a2173cc3.css",
+    "main.js": "/coffee-select/static/js/main.57c88eba.js",
     "index.html": "/coffee-select/index.html",
-    "main.e6c13ad2.css.map": "/coffee-select/static/css/main.e6c13ad2.css.map",
-    "main.dfcb238c.js.map": "/coffee-select/static/js/main.dfcb238c.js.map"
+    "main.a2173cc3.css.map": "/coffee-select/static/css/main.a2173cc3.css.map",
+    "main.57c88eba.js.map": "/coffee-select/static/js/main.57c88eba.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.dfcb238c.js"
+    "static/css/main.a2173cc3.css",
+    "static/js/main.57c88eba.js"
   ]
 }
