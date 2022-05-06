@@ -1,52 +1,65 @@
-import { firestore } from "./firebase";
 import React, { useEffect, useState } from "react";
-import { useMemo } from "react";
+import { OrderInfo, OrderMap } from "types";
+import OrderList from "OrderList";
+import { Button } from "antd";
+import { COFFEESELECT, DOC } from "config";
+import AddModal from "AddModal";
+import styled from "styled-components";
 
-function App() {
-  const [menuChange, setMenuChange] = useState<boolean>(false);
+const ContentsWrapper = styled.div`
+  min-width: 800px;
+  height: 800px;
+  overflow-y: scroll;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+`;
+const ContentsHeader = styled.div`
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eaedfe;
+`;
 
-  const orderInfo = [
-    { name: "이명호", drink: "블루베리스무디", option: "" },
-    { name: "박상종", drink: "블루베리스무디", option: "" },
-    { name: "김덕형", drink: "아보카도", option: "설탕 반만" },
-  ];
+function App(): JSX.Element {
+  const [orderInfo, setOrderInfo] = useState<OrderInfo[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const orderInfoListItem = orderInfo.map((data, index) => (
-    <div key={index}>
-      {`Name: ${data.name} Drink: ${data.drink} Option: ${data.option}`}
-    </div>
-  ));
+  const orderUpdate = (orders: OrderInfo[]) => {
+    setOrderInfo(orders);
+  };
 
-  const changeOrderInfoListItem = orderInfo.map((data, index) => (
-    <div key={index}>
-      <div>
-        <span> Name : </span> <input />
-        <span> Drink: </span> <input />
-        <span> Option : </span> <input />
-      </div>
-    </div>
-  ));
-
-  const onMenuChange = () => setMenuChange(!menuChange);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
 
   useEffect(() => {
-    // coffeeSelect라는 변수로 firestore의 collection인 coffee-select에 접근
-    const coffeeSelect = firestore.collection("coffee-select");
-    coffeeSelect
-      // document
-      .doc("lPycKHkwzNcWRwqKTD5j")
+    COFFEESELECT.doc(DOC)
       .get()
       .then((data) => {
-        console.log(data.data());
+        const orderMap = data.data() as OrderMap;
+        setOrderInfo(orderMap.order);
       });
   }, []);
 
   return (
-    <>
-      <button onClick={onMenuChange}>변경</button>
-      {menuChange && changeOrderInfoListItem}
-      {!menuChange && orderInfoListItem}
-    </>
+    <ContentsWrapper>
+      <ContentsHeader>
+        <Button type="primary" ghost onClick={showModal}>
+          Order Add
+        </Button>
+      </ContentsHeader>
+      <AddModal
+        isModalVisible={isModalVisible}
+        orderInfo={orderInfo}
+        setIsModalVisible={setIsModalVisible}
+        setOrderInfo={setOrderInfo}
+      />
+      <OrderList orderInfo={orderInfo} orderUpdate={orderUpdate} />
+    </ContentsWrapper>
   );
 }
 
