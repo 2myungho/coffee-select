@@ -26,6 +26,7 @@ const Wrapper = styled.div`
     overflow-y: scroll;
     height: 726px;
     display: flex;
+    padding-bottom: 20px;
   }
   .orderList {
   }
