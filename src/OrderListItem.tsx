@@ -60,7 +60,6 @@ export default function OrderListItem({
     drink,
     option,
   });
-  console.log(orderKey);
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setChangedOrderInfo({ ...changedOrderInfo, name: e.target.value });
   const onDrinkChange = (e: React.ChangeEvent<HTMLInputElement>) =>
