@@ -7,7 +7,13 @@ import AddModal from "AddModal";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  min-width: 1200px;
+  @media ${(props) => props.theme.mobile} {
+    width: 350px;
+    height: 600px;
+    .contentsWrapper {
+    }
+  }
+  width: 1200px;
   height: 800px;
   overflow: hidden;
   position: absolute;

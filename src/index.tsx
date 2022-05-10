@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import "antd/dist/antd.min.css";
 import "./index.css";
 import App from "./App";
+import { ThemeProvider } from "styled-components";
+import theme from "assets/theme";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -17,7 +19,9 @@ root.render(
   <RecoilRoot>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={true} />
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>
   </RecoilRoot>
